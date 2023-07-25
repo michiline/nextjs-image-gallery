@@ -27,25 +27,25 @@ interface GalleryProps {
 const Gallery = ({ id, images, cover }: GalleryProps) => {
 	const [col, setCol] = useState(5)
 	const columns = Array.from(Array(col).keys())
-	const [width, setWidth] = useState(0)
-	const handleResize = (e) => {
-		const width = e.target.window.innerWidth
-		if (width < 786) {
-			setCol(1)
-		} else if (width < 1024) {
-			setCol(2)
-		} else if (width < 1280) {
-			setCol(3)
-		} else if (width < 1536) {
-			setCol(4)
-		} else {
-			setCol(5)
-		}
-	}
-	useEffect(() => {
-		window.addEventListener('resize', handleResize)
-		return () => window.removeEventListener('resize', handleResize)
-	}, [])
+	// const [width, setWidth] = useState(0)
+	// const handleResize = (e) => {
+	// 	const width = e.target.window.innerWidth
+	// 	if (width < 786) {
+	// 		setCol(1)
+	// 	} else if (width < 1024) {
+	// 		setCol(2)
+	// 	} else if (width < 1280) {
+	// 		setCol(3)
+	// 	} else if (width < 1536) {
+	// 		setCol(4)
+	// 	} else {
+	// 		setCol(5)
+	// 	}
+	// }
+	// useEffect(() => {
+	// 	window.addEventListener('resize', handleResize)
+	// 	return () => window.removeEventListener('resize', handleResize)
+	// }, [])
 
 	return (
 		<div className='w-full flex flex-col'>
