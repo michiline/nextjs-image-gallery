@@ -41,10 +41,10 @@ const Gallery = ({ id, images, cover }: GalleryProps) => {
 					return (
 						<li
 							key={image.src}
-							className={`relative h-[30vh] ${
+							className={`relative h-[30vh]${
 								image.aspectRatio > 1
 									? ' aspect-[3/2]'
-									: 'aspect-[2/3]'
+									: 'aspect[2/3]'
 							} grow mx-1 my-1`}
 						>
 							<Image
