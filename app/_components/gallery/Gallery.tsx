@@ -36,16 +36,14 @@ const Gallery = ({ id, images, cover }: GalleryProps) => {
 					placeholder='blur'
 				/>
 			</div>
-			<ul className='w-full flex flex-wrap h-full list-none [&>*:last-child]:grow-0'>
+			<ul className='w-full flex flex-wrap h-full list-none sm:[&>*:last-child]:grow-0'>
 				{images.map((image) => {
+					const aspectRatio =
+						image.aspectRatio > 1 ? ' aspect-[3/2]' : 'aspect-[2/3]'
 					return (
 						<li
 							key={image.src}
-							className={`relative h-[30vh] ${
-								image.aspectRatio > 1
-									? ' aspect-[3/2]'
-									: 'aspect-[2/3]'
-							} grow mx-1 my-1`}
+							className={`w-full h-auto smLandscape:w-full smLandscape:h-auto md:h-[20vh] md:w-auto lg:h-[25vh] xl:h-[30vh] 2xl:h-[35vh] relative ${aspectRatio} grow mx-1 my-1 overflow-hidden`}
 						>
 							<Image
 								src={`/${image.src}`}
