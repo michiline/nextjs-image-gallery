@@ -41,7 +41,10 @@ const Gallery = ({ galleryId, categoryId, gallery, cover }: GalleryProps) => {
 		}
 	}, [])
 	const [activeCategoryId, setActiveCategoryId] = useState(categoryId)
-	console.log(categoryId)
+	const category = gallery.find(
+		(item: { categoryId: string | null }) =>
+			item.categoryId === activeCategoryId
+	)
 	return (
 		<div className='w-full flex flex-col'>
 			<Cover id={galleryId} img={cover} handleClick={scrollToGallery} />
@@ -67,37 +70,32 @@ const Gallery = ({ galleryId, categoryId, gallery, cover }: GalleryProps) => {
 				className='w-full flex flex-wrap h-full list-none sm:[&>*:last-child]:grow-0'
 				ref={galleryRef}
 			>
-				{gallery &&
-					gallery
-						.find(
-							(item: { categoryId: string | null }) =>
-								item.categoryId === activeCategoryId
+				{category &&
+					category.images.map((image) => {
+						const aspectRatio =
+							image.aspectRatio > 1
+								? ' aspect-[3/2]'
+								: 'aspect-[2/3]'
+						return (
+							<li
+								key={image.src}
+								className={`cursor-pointer group w-full h-auto smLandscape:w-full smLandscape:h-auto md:h-[20vh] md:w-auto lg:h-[25vh] xl:h-[30vh] 2xl:h-[35vh] relative ${aspectRatio} grow mx-1 my-1 overflow-hidden`}
+							>
+								<Image
+									src={`/${image.src}`}
+									alt={image.src}
+									fill
+									blurDataURL={image.blurData}
+									placeholder='blur'
+									style={{
+										objectFit: 'cover',
+										objectPosition: 'center',
+									}}
+								/>
+								<ImageOverlay />
+							</li>
 						)
-						.images.map((image) => {
-							const aspectRatio =
-								image.aspectRatio > 1
-									? ' aspect-[3/2]'
-									: 'aspect-[2/3]'
-							return (
-								<li
-									key={image.src}
-									className={`cursor-pointer group w-full h-auto smLandscape:w-full smLandscape:h-auto md:h-[20vh] md:w-auto lg:h-[25vh] xl:h-[30vh] 2xl:h-[35vh] relative ${aspectRatio} grow mx-1 my-1 overflow-hidden`}
-								>
-									<Image
-										src={`/${image.src}`}
-										alt={image.src}
-										fill
-										blurDataURL={image.blurData}
-										placeholder='blur'
-										style={{
-											objectFit: 'cover',
-											objectPosition: 'center',
-										}}
-									/>
-									<ImageOverlay />
-								</li>
-							)
-						})}
+					})}
 			</ul>
 		</div>
 	)
