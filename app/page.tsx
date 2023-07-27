@@ -1,7 +1,7 @@
 import Gallery from './_components/gallery/Gallery'
-import { images } from './images'
+import { galleries } from './images'
 
 export default function Home({}) {
-	const gallery = images.nina
+	const gallery = galleries.nina
 	return <Gallery {...gallery} />
 }

@@ -29,7 +29,7 @@ const Cover = ({ id, img, handleClick }: CoverProps) => {
 				<h1 className='h-min text-6xl text-center'>{id}</h1>
 				<button
 					onClick={handleClick}
-					className='border border-white h-[45px] px-8 mt-8 text-md hover:bg-white hover:text-black transition ease-in-ou duration-300'
+					className='border border-white h-[45px] px-8 mt-8 text-md hover:bg-white hover:text-black transition ease-in-out duration-150'
 				>
 					View Gallery
 				</button>

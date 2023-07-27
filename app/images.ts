@@ -1,7 +1,7 @@
 // @ts-ignore
-const imagesContext = require.context('../images', true, /\.json$/)
+const galleriesContext = require.context('../images', true, /\.json$/)
 
-export const images = imagesContext
+export const galleries = galleriesContext
 	.keys()
 	.reduce((acc: { [x: string]: any }, path: string) => {
 		// The key will be the parent directory name
@@ -10,7 +10,7 @@ export const images = imagesContext
 			.replace('./', '')
 			.replace('.json', '')
 
-		acc[fileName] = imagesContext(path)
+		acc[fileName] = galleriesContext(path)
 
 		return acc
 	}, {})
