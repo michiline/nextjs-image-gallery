@@ -29,6 +29,14 @@ interface GalleryProps {
 	}
 }
 
+export async function generateStaticParams() {
+	return galleries.nina.categories.map(
+		(category: { categoryId: string }) => ({
+			slug: ['nina', category.categoryId],
+		})
+	)
+}
+
 export default function GalleryPage({
 	params,
 }: {
