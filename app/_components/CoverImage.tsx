@@ -20,7 +20,7 @@ const CoverImage = ({ img }: CoverImageProps) => {
 			src={`/${currImg.src}`}
 			blurDataURL={currImg.blurData}
 			alt='Cover image'
-			layout='fill'
+			fill
 			placeholder='blur'
 			quality={100}
 			sizes={'100vw'}
