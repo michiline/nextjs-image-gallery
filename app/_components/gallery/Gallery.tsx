@@ -99,6 +99,7 @@ const Gallery = ({ gallery, activeCategory }: GalleryComponentProps) => {
 										}}
 										width={image.width}
 										height={image.height}
+										quality={40}
 									/>
 									<ImageOverlay />
 								</motion.div>

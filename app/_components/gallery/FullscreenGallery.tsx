@@ -100,7 +100,7 @@ const FullscreenGallery = ({ category }: { category: CategoryProps }) => {
 								alt='alt'
 								width={category.images[activeImgId].width}
 								height={category.images[activeImgId].height}
-								quality={60}
+								quality={40}
 								blurDataURL={
 									category.images[activeImgId].blurData
 								}
