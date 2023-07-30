@@ -1,5 +1,4 @@
 'use client'
-import Image from 'next/image'
 import Overlay from './Overlay'
 import dynamic from 'next/dynamic'
 
