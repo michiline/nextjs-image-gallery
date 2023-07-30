@@ -43,7 +43,7 @@ const FullscreenGallery = ({ category }: { category: CategoryProps }) => {
 			} else {
 				params.delete(name)
 			}
-			return params.size ? `?${params.toString()}` : ''
+			return params.toString() ? `?${params.toString()}` : ''
 		},
 		[searchParams]
 	)
@@ -56,17 +56,15 @@ const FullscreenGallery = ({ category }: { category: CategoryProps }) => {
 				const len = category.images.length
 				let nextImg = activeImgId + direction
 				nextImg = (((nextImg % len) + len) % len) + 1 // To handle negative values
-				router.push(
-					pathname +
-						createQuery({
-							name: 'p',
-							value: nextImg.toString(),
-							operation: 'add',
-						}),
-					{
-						scroll: false,
-					}
-				)
+				const query = createQuery({
+					name: 'p',
+					value: nextImg.toString(),
+					operation: 'add',
+				})
+
+				router.push(pathname + query, {
+					scroll: false,
+				})
 			}
 		},
 		[activeImgId, category.images.length, createQuery, pathname, router]
@@ -102,7 +100,7 @@ const FullscreenGallery = ({ category }: { category: CategoryProps }) => {
 								alt='alt'
 								width={category.images[activeImgId].width}
 								height={category.images[activeImgId].height}
-								quality={80}
+								quality={60}
 								blurDataURL={
 									category.images[activeImgId].blurData
 								}
@@ -134,7 +132,9 @@ const FullscreenGallery = ({ category }: { category: CategoryProps }) => {
 					</div>
 					<button
 						className='group fixed top-4 right-4 z-30 text-white'
-						onClick={() => router.push(pathname, { scroll: false })}
+						onClick={() => {
+							router.push(pathname, { scroll: false })
+						}}
 					>
 						<XMarkIcon
 							width={48}
