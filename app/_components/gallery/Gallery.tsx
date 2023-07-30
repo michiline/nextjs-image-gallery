@@ -8,15 +8,12 @@ import { ArrowDownTrayIcon } from '@heroicons/react/24/outline'
 import { CategoryProps, GalleryProps } from '../../_types'
 import dynamic from 'next/dynamic'
 import FullscreenGallery from './FullscreenGallery'
+import { motion } from 'framer-motion'
 
 interface GalleryComponentProps {
 	gallery: GalleryProps
 	activeCategory: CategoryProps
 }
-
-const DynamicFullscreenGallery = dynamic(() => import('./FullscreenGallery'), {
-	loading: () => <Loading />,
-})
 
 const Gallery = ({ gallery, activeCategory }: GalleryComponentProps) => {
 	const galleryRef = useRef<HTMLUListElement>(null)
@@ -83,19 +80,28 @@ const Gallery = ({ gallery, activeCategory }: GalleryComponentProps) => {
 								scroll={false}
 								className={`relative w-full h-full inline-block`}
 							>
-								<Image
-									src={`/${image.src}`}
-									alt={image.src}
-									fill
-									blurDataURL={image.blurData}
-									placeholder='blur'
-									style={{
-										objectFit: 'cover',
-										objectPosition: 'center',
+								<motion.div
+									initial={{ opacity: 0 }}
+									whileInView={{ opacity: 1 }}
+									viewport={{ once: true }}
+									transition={{
+										duration: 0.3,
 									}}
-									sizes='(max-width: 640px) 100vw, (max-width: 1024px: 25vw), (max-width-1536px: 20vw)'
-								/>
-								<ImageOverlay />
+								>
+									<Image
+										src={`/${image.src}`}
+										alt={image.src}
+										blurDataURL={image.blurData}
+										placeholder='blur'
+										style={{
+											objectFit: 'cover',
+											objectPosition: 'top',
+										}}
+										width={image.width}
+										height={image.height}
+									/>
+									<ImageOverlay />
+								</motion.div>
 							</Link>
 						</li>
 					)
