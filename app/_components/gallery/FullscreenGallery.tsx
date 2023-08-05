@@ -2,7 +2,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
-import { CategoryProps, ImageProps } from '../../_types'
+import { CategoryProps, ImageDimensionsProps } from '../../_types'
 import { useCallback, useEffect, useState } from 'react'
 import {
 	ChevronLeftIcon,
@@ -10,23 +10,18 @@ import {
 	XMarkIcon,
 } from '@heroicons/react/24/outline'
 
-const FullscreenGallery = ({ category }: { category: CategoryProps }) => {
+const FullscreenGallery = ({
+	category,
+	dim,
+}: {
+	category: CategoryProps
+	dim: ImageDimensionsProps
+}) => {
 	const router = useRouter()
 	const pathname = usePathname()
 	const searchParams = useSearchParams()
 
 	const [activeImgId, setActiveImgId] = useState<number>(-1)
-	const [direction, setDirection] = useState(0)
-	useEffect(() => {
-		const photoId = searchParams.get('p')
-		if (photoId) {
-			const activeImgId = Number(photoId) - 1
-			setActiveImgId(activeImgId)
-		} else {
-			setActiveImgId(-1)
-		}
-	}, [searchParams])
-
 	const createQuery = useCallback(
 		({
 			name,
@@ -50,8 +45,6 @@ const FullscreenGallery = ({ category }: { category: CategoryProps }) => {
 
 	const handleSlide = useCallback(
 		(direction: number) => {
-			setDirection(direction)
-
 			if (activeImgId !== -1) {
 				const len = category.images.length
 				let nextImg = activeImgId + direction
@@ -69,19 +62,47 @@ const FullscreenGallery = ({ category }: { category: CategoryProps }) => {
 		},
 		[activeImgId, category.images.length, createQuery, pathname, router]
 	)
+	useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === 'ArrowLeft') {
+				handleSlide(-1)
+			} else if (event.key === 'ArrowRight') {
+				handleSlide(1)
+			} else if (event.key === 'Escape') {
+				router.push(pathname, { scroll: false })
+			}
+		}
+
+		window.addEventListener('keydown', handleKeyDown)
+		return () => {
+			window.removeEventListener('keydown', handleKeyDown)
+		}
+	}, [handleSlide, pathname, router])
+	useEffect(() => {
+		const photoId = searchParams.get('p')
+		if (photoId) {
+			const activeImgId = Number(photoId) - 1
+			setActiveImgId(activeImgId)
+		} else {
+			setActiveImgId(-1)
+		}
+	}, [searchParams])
 
 	return (
 		<AnimatePresence>
-			{activeImgId !== -1 && (
+			{activeImgId !== -1 && dim && (
 				<motion.div
-					initial='hidden'
-					animate='visible'
-					exit='hidden'
-					variants={container}
-					viewport={{ once: true }}
-					transition={{
-						duration: 0.3,
+					initial={{
+						opacity: 0,
 					}}
+					animate={{
+						opacity: 1,
+					}}
+					exit={{
+						opacity: 0,
+					}}
+					transition={{ duration: 0.3 }}
+					viewport={{ once: true }}
 					className='fixed top-0 w-full min-h-screen h-full flex flex-col items-center justify-center bg-black z-20'
 				>
 					<AnimatePresence mode='popLayout'>
@@ -116,7 +137,7 @@ const FullscreenGallery = ({ category }: { category: CategoryProps }) => {
 							width={48}
 							height={48}
 							color='#FFF'
-							className='p-2 opacity-60 group-hover:opacity-100 mr-4 mb-[64px]'
+							className='p-2 opacity-60 group-hover:opacity-100 mr-2 mb-[64px]'
 						/>
 					</div>
 					<div
@@ -127,11 +148,11 @@ const FullscreenGallery = ({ category }: { category: CategoryProps }) => {
 							width={48}
 							height={48}
 							color='#FFF'
-							className='p-2 opacity-60 group-hover:opacity-100 ml-4 mb-[64px]'
+							className='p-2 opacity-60 group-hover:opacity-100 ml-2 mb-[64px]'
 						/>
 					</div>
 					<button
-						className='group fixed top-4 right-4 z-30 text-white'
+						className='group fixed top-4 right-2 z-30 text-white'
 						onClick={() => {
 							router.push(pathname, { scroll: false })
 						}}

@@ -25,3 +25,10 @@ export interface GalleryProps {
 		}
 	}
 }
+
+export interface ImageDimensionsProps {
+	width: number
+	height: number
+	x: number
+	y: number
+}

@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
-export default function Home({}) {
+export default function Home() {
 	return (
-		<div className='flexw-full px-6 py-6'>
+		<div className='flex w-full px-6 py-6'>
 			<h1 className='text-lg font-bold'>NextJS Image Gallery</h1>
 			<p className='pt-4'>
 				Image gallery which consists of justified grid and full screen
