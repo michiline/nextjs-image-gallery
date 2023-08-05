@@ -46,28 +46,6 @@ const Gallery = ({ gallery, activeCategory }: GalleryComponentProps) => {
 			galleryRef.current.scrollIntoView({ behavior: 'smooth' })
 		}
 	}, [])
-	const [dim, setDim] = useState({
-		width: 0,
-		height: 0,
-		x: 0,
-		y: 0,
-	})
-
-	const handleEvent = useCallback(
-		(e: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>) => {
-			e.preventDefault()
-
-			const rect = (e.target as HTMLElement).getBoundingClientRect()
-
-			setDim({
-				width: rect.width,
-				height: rect.height,
-				x: rect.left,
-				y: rect.top,
-			})
-		},
-		[]
-	)
 
 	return (
 		<div className='w-full flex flex-col relative'>
@@ -118,8 +96,6 @@ const Gallery = ({ gallery, activeCategory }: GalleryComponentProps) => {
 						<li
 							key={image.src}
 							className={`cursor-pointer group w-full h-auto smLandscape:w-full smLandscape:h-auto md:h-[20vh] md:w-auto lg:h-[25vh] xl:h-[30vh] 2xl:h-[35vh] ${aspectRatio} grow mx-[0.5px] my-[0.5px] lg:mx-1 lg:my-1 overflow-hidden`}
-							onClick={handleEvent}
-							onTouchEnd={handleEvent}
 						>
 							<Link
 								key={image.src}
@@ -163,7 +139,7 @@ const Gallery = ({ gallery, activeCategory }: GalleryComponentProps) => {
 				})}
 			</ul>
 			<Suspense fallback={<Loading />}>
-				<FullscreenGallery category={activeCategory} dim={dim} />
+				<FullscreenGallery category={activeCategory} />
 			</Suspense>
 			<Suspense fallback={<Loading />}>
 				<SharedModal

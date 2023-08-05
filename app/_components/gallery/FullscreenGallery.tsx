@@ -2,7 +2,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
-import { CategoryProps, ImageDimensionsProps } from '../../_types'
+import { CategoryProps } from '../../_types'
 import { useCallback, useEffect, useState } from 'react'
 import {
 	ChevronLeftIcon,
@@ -10,13 +10,7 @@ import {
 	XMarkIcon,
 } from '@heroicons/react/24/outline'
 
-const FullscreenGallery = ({
-	category,
-	dim,
-}: {
-	category: CategoryProps
-	dim: ImageDimensionsProps
-}) => {
+const FullscreenGallery = ({ category }: { category: CategoryProps }) => {
 	const router = useRouter()
 	const pathname = usePathname()
 	const searchParams = useSearchParams()
