@@ -84,7 +84,7 @@ const FullscreenGallery = ({ category }: { category: CategoryProps }) => {
 
 	return (
 		<AnimatePresence>
-			{activeImgId !== -1 && dim && (
+			{activeImgId !== -1 && (
 				<motion.div
 					initial={{
 						opacity: 0,
