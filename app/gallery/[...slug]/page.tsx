@@ -1,6 +1,6 @@
-import { galleries } from '../../images'
-import Gallery from '../../_components/gallery/Gallery'
-import { GalleryProps } from '../../_types'
+import { galleries } from '@/images'
+import Gallery from '@/_components/gallery/Gallery'
+import { GalleryProps } from '@/_types'
 
 export async function generateStaticParams() {
 	return Object.entries(galleries).flatMap(([galleryId, gallery]) => [

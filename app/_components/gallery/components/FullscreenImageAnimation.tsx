@@ -2,14 +2,14 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
-import { CategoryProps, ImageDimensionsProps } from '../../_types'
+import { CategoryProps, ImageDimensionsProps } from '@/_types'
 import { useCallback, useEffect, useState } from 'react'
 import {
 	ChevronLeftIcon,
 	ChevronRightIcon,
 	XMarkIcon,
 } from '@heroicons/react/24/outline'
-import createQuery from '../../_utils/createQuery'
+import createQuery from '@/_utils/createQuery'
 
 const FullscreenGallery = ({
 	category,

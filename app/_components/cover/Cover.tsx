@@ -1,8 +1,11 @@
 'use client'
-import Overlay from './Overlay'
-import dynamic from 'next/dynamic'
 
-const DynamicCoverImage = dynamic(() => import('./CoverImage'), { ssr: false })
+import dynamic from 'next/dynamic'
+import Overlay from './components/Overlay'
+
+const DynamicCoverImage = dynamic(() => import('./components/CoverImage'), {
+	ssr: false,
+})
 
 interface CoverProps {
 	id: string

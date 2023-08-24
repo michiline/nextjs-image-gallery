@@ -3,7 +3,7 @@
 import { usePathname, useSearchParams } from 'next/navigation'
 
 import Modal from './Modal'
-import createQuery from '../../_utils/createQuery'
+import createQuery from '@/_utils/createQuery'
 
 const SharedModal = ({
 	sharedImgId,

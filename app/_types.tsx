@@ -1,4 +1,7 @@
+import { LegacyRef } from 'react'
+
 export interface ImageProps {
+	id: number
 	src: string
 	aspectRatio: number
 	blurData: string
@@ -31,4 +34,18 @@ export interface ImageDimensionsProps {
 	height: number
 	x: number
 	y: number
+}
+
+export interface JustifiedGridProps {
+	gallery: GalleryProps
+	activeCategory: CategoryProps
+	galleryRef: LegacyRef<HTMLUListElement>
+	handleShare: (params: {
+		e: React.MouseEvent<SVGSVGElement, MouseEvent>
+		id: number
+	}) => void
+	handleDownload: (params: {
+		e: React.MouseEvent<SVGSVGElement, MouseEvent>
+		src: string
+	}) => void
 }

@@ -23,15 +23,15 @@ const ImageOverlay = ({
 		<div className='absolute top-0 w-full h-full flex items-end'>
 			<div className='relative px-4 py-4 flex justify-end items-end w-full h-[20%] z-10 bg-[linear-gradient(0deg,rgba(0,0,0,0.8)10%,rgba(0,0,0,0))] opacity-0 group-hover:opacity-100 transition ease-in-out duration-150'>
 				<ShareIcon
-					width={48}
-					height={48}
+					width={40}
+					height={40}
 					color='#FFFFFF'
 					className='p-2 cursor-pointer z-30 opacity-60 hover:opacity-100'
 					onClick={(e) => handleShare({ e, id })}
 				/>
 				<ArrowDownTrayIcon
-					width={48}
-					height={48}
+					width={40}
+					height={40}
 					color='#FFFFFF'
 					className='p-2 cursor-pointer z-30 opacity-60 hover:opacity-100'
 					onClick={(e) => handleDownload({ e, src })}

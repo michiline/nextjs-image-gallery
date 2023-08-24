@@ -1,6 +1,6 @@
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { AnimatePresence, motion } from 'framer-motion'
-import useOutsideClick from '../../_hooks/useOutsideClick'
+import useOutsideClick from '@/_hooks/useOutsideClick'
 
 interface ModalProps {
 	show: boolean
