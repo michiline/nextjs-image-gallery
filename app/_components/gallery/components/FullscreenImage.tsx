@@ -102,7 +102,6 @@ const FullscreenImage = ({ category }: { category: CategoryProps }) => {
 
 	return (
 		<>
-			{' '}
 			<AnimatePresence>
 				{activeImgId !== -1 && (
 					<motion.div
@@ -133,38 +132,42 @@ const FullscreenImage = ({ category }: { category: CategoryProps }) => {
 								<Image
 									src={`/${category.images[activeImgId].src}`}
 									alt='alt'
-									width={category.images[activeImgId].width}
-									height={category.images[activeImgId].height}
 									quality={30}
 									blurDataURL={
 										category.images[activeImgId].blurData
 									}
+									height={window.innerHeight - 128}
+									width={
+										(window.innerHeight - 128) *
+										category.images[activeImgId].aspectRatio
+									}
 									placeholder='blur'
+									style={{ objectFit: 'cover' }}
 								/>
 							</motion.div>
 						</AnimatePresence>
 						<div
-							className='group cursor-pointer fixed h-screen w-[20%] top-0 mt-[64px] right-0 z-3 flex items-center justify-end'
+							className='peer/right cursor-pointer fixed h-screen w-[20%] top-0 mt-[64px] right-0 z-3 flex items-center justify-end'
 							onClick={handleSlideForward}
-						>
-							<ChevronRightIcon
-								width={40}
-								height={40}
-								color='#FFF'
-								className='p-2 opacity-60 group-hover:opacity-100 mr-2 mb-[64px]'
-							/>
-						</div>
+						/>
+						<ChevronRightIcon
+							width={40}
+							height={40}
+							color='#FFF'
+							className='p-2 opacity-60 peer-hover/right:opacity-100 hover:opacity-100 absolute right-2 top-1/2 cursor-pointer'
+							onClick={handleSlideForward}
+						/>
 						<div
-							className='group cursor-pointer fixed h-screen w-[20%] top-0 left-0 mt-[64px] z-3 flex items-center justify-start'
+							className='peer/left cursor-pointer fixed h-screen w-[20%] top-0 left-0 mt-[64px] z-3 flex items-center justify-start'
 							onClick={handleSlideBackward}
-						>
-							<ChevronLeftIcon
-								width={40}
-								height={40}
-								color='#FFF'
-								className='p-2 opacity-60 group-hover:opacity-100 ml-2 mb-[64px]'
-							/>
-						</div>
+						/>
+						<ChevronLeftIcon
+							width={40}
+							height={40}
+							color='#FFF'
+							className='p-2 opacity-60 peer-hover/left:opacity-100 hover:opacity-100 absolute left-2 top-1/2 cursor-pointer'
+							onClick={handleSlideBackward}
+						/>
 						<button
 							className='group fixed top-4 right-2 z-30 text-white'
 							onClick={() => {
