@@ -11,6 +11,7 @@ import SharedModal from '@/_components/modal/SharedModal'
 import DownloadModal from '@/_components/modal/DownloadModal'
 import Loading from '@/_components/Loading'
 import ColumnGrid from './components/ColumnGrid'
+import { useActiveImage } from '@/_hooks/useActiveImage'
 
 interface GalleryComponentProps {
 	gallery: GalleryProps
@@ -42,10 +43,8 @@ const Gallery = ({ gallery, activeCategory }: GalleryComponentProps) => {
 	}
 	const galleryRef = useRef<HTMLUListElement>(null)
 	const scrollToGallery = useCallback(() => {
-		if (galleryRef && galleryRef.current) {
-			galleryRef.current.scrollIntoView({ behavior: 'smooth' })
-		}
-	}, [])
+		galleryRef.current?.scrollIntoView({ behavior: 'smooth' })
+	}, [galleryRef])
 
 	return (
 		<div className='w-full flex flex-col'>

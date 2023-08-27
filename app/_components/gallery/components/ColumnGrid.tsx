@@ -48,17 +48,16 @@ const ColumnGrid = ({
 		}
 	}, [numColumns])
 
-	const totalHeight = (column: ImageProps[]): number => {
-		const columnWidth = windowWidth / numColumns
-		return column.reduce(
-			(sum, img) => sum + columnWidth / img.aspectRatio,
-			0
-		)
-	}
-
 	const columnWidth = windowWidth / numColumns
 
 	useEffect(() => {
+		const totalHeight = (column: ImageProps[]): number => {
+			const columnWidth = windowWidth / numColumns
+			return column.reduce(
+				(sum, img) => sum + columnWidth / img.aspectRatio,
+				0
+			)
+		}
 		const getShortestColumnIndex = (columns: ImageProps[][]): number => {
 			return columns.reduce(
 				(shortestIndex, currentColumn, currentIndex, arr) =>
