@@ -18,7 +18,7 @@ const CoverImage = ({ img }: CoverImageProps) => {
 	const currImg = window && window.innerWidth <= 768 ? img.mobile : img.web
 	return (
 		<Image
-			src={`/${currImg.src}`}
+			src={`https://d3vwli3tdrxeva.cloudfront.net/${currImg.src}`}
 			blurDataURL={currImg.blurData}
 			alt='Cover image'
 			fill

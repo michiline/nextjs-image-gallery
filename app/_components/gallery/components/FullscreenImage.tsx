@@ -137,7 +137,7 @@ const FullscreenImage = ({
 								}}
 							>
 								<Image
-									src={`/${category.images[activeImgId].src}`}
+									src={`https://d3vwli3tdrxeva.cloudfront.net/${category.images[activeImgId].src}`}
 									alt='alt'
 									quality={30}
 									blurDataURL={

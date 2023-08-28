@@ -94,7 +94,7 @@ const ColumnGrid = ({
 									scroll={false}
 								>
 									<Image
-										src={`/${img.src}`}
+										src={`https://d3vwli3tdrxeva.cloudfront.net/${img.src}`}
 										alt={img.src}
 										blurDataURL={img.blurData}
 										placeholder='blur'
