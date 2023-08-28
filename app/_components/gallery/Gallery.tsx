@@ -1,17 +1,17 @@
 'use client'
 
-import { Suspense, useCallback, useRef, useState } from 'react'
+import { Suspense, useCallback, useRef } from 'react'
 import { CategoryProps, GalleryProps } from '@/_types'
 
 import Header from './components/Header'
-import JustifedGrid from './components/JustifiedGrid'
 import FullscreenImage from './components/FullscreenImage'
 
-import SharedModal from '@/_components/modal/SharedModal'
-import DownloadModal from '@/_components/modal/DownloadModal'
 import Loading from '@/_components/Loading'
 import ColumnGrid from './components/ColumnGrid'
-import { useActiveImage } from '@/_hooks/useActiveImage'
+import Modal from '../modal/Modal'
+import ModalContent from '../modal/ModalContent'
+import useModal from '@/_hooks/useModal'
+import FullscreenHandler from '@/_utils/FullscreenHandler'
 
 interface GalleryComponentProps {
 	gallery: GalleryProps
@@ -19,28 +19,9 @@ interface GalleryComponentProps {
 }
 
 const Gallery = ({ gallery, activeCategory }: GalleryComponentProps) => {
-	const [sharedImgId, setSharedImgId] = useState<number>(-1)
-	const [downloadImgSrc, setDownloadImgSrc] = useState<string>('')
-	const handleShare = ({
-		e,
-		id,
-	}: {
-		e: React.MouseEvent<SVGSVGElement, MouseEvent>
-		id: number
-	}) => {
-		e.preventDefault()
-		setSharedImgId(id)
-	}
-	const handleDownload = ({
-		e,
-		src,
-	}: {
-		e: React.MouseEvent<SVGSVGElement, MouseEvent>
-		src: string
-	}) => {
-		e.preventDefault()
-		setDownloadImgSrc(src)
-	}
+	const { modalData, activeModal, handleModalOpen, handleModalClose } =
+		useModal()
+
 	const galleryRef = useRef<HTMLUListElement>(null)
 	const scrollToGallery = useCallback(() => {
 		galleryRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -57,21 +38,17 @@ const Gallery = ({ gallery, activeCategory }: GalleryComponentProps) => {
 				galleryRef={galleryRef}
 				gallery={gallery}
 				activeCategory={activeCategory}
-				handleDownload={handleDownload}
-				handleShare={handleShare}
+				handleModalOpen={handleModalOpen}
 			/>
+			<FullscreenHandler isModalOpen={!!modalData} />
 			<Suspense fallback={<Loading />}>
-				<FullscreenImage category={activeCategory} />
-				<SharedModal
-					show={sharedImgId !== -1}
-					handleClose={() => setSharedImgId(-1)}
-					sharedImgId={sharedImgId + 1}
+				<FullscreenImage
+					category={activeCategory}
+					handleModalOpen={handleModalOpen}
 				/>
-				<DownloadModal
-					show={!!downloadImgSrc}
-					handleClose={() => setDownloadImgSrc('')}
-					downloadImgSrc={downloadImgSrc}
-				/>
+				<Modal show={!!modalData} handleClose={handleModalClose}>
+					<ModalContent modalType={activeModal} data={modalData} />
+				</Modal>
 			</Suspense>
 		</div>
 	)

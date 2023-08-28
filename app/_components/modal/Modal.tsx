@@ -1,6 +1,9 @@
+'use client'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { AnimatePresence, motion } from 'framer-motion'
 import useOutsideClick from '@/_hooks/useOutsideClick'
+import { useFullScreen } from '@/_contexts/FullscreenContext'
+import { useEffect } from 'react'
 
 interface ModalProps {
 	show: boolean
@@ -16,12 +19,21 @@ const Modal = ({
 	children,
 }: ModalProps) => {
 	const childrenRef = useOutsideClick(handleClose)
+	const { enterFullscreen, exitFullscreen } = useFullScreen()
+	useEffect(() => {
+		if (show) {
+			enterFullscreen()
+		} else {
+			exitFullscreen()
+		}
+	}, [show, enterFullscreen, exitFullscreen])
+
 	return (
 		<AnimatePresence>
 			{show && (
 				<motion.div
 					className={`fixed w-full h-screen flex justify-center items-center z-20 ${
-						transparent ? 'bg-[#0000007A]' : 'bg-[#000]'
+						transparent ? 'bg-[#0000009A]' : 'bg-[#000]'
 					}`}
 					initial={{
 						opacity: 0,
@@ -35,12 +47,12 @@ const Modal = ({
 					transition={{ duration: 0.3 }}
 				>
 					<button
-						className='group fixed top-4 right-4 z-20 text-white'
+						className='group fixed top-2 right-2 z-20 text-white'
 						onClick={handleClose}
 					>
 						<XMarkIcon
-							width={48}
-							height={48}
+							width={40}
+							height={40}
 							color='#FFF'
 							className='p-2 opacity-60 group-hover:opacity-100'
 						/>

@@ -1,16 +1,15 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { JustifiedGridProps } from '@/_types'
+import { GridGalleryProps } from '@/_types'
 import Image from 'next/image'
-import ImageOverlay from './ImageOverlay'
+import OptionIcons from './OptionIcons'
 
 const JustifedGrid = ({
 	gallery,
 	activeCategory,
 	galleryRef,
-	handleShare,
-	handleDownload,
-}: JustifiedGridProps) => {
+	handleModalOpen,
+}: GridGalleryProps) => {
 	return (
 		<ul
 			className='w-full flex flex-wrap h-full list-none sm:[&>*:last-child]:grow-0'
@@ -53,12 +52,14 @@ const JustifedGrid = ({
 									height={img.height}
 									quality={30}
 								/>
-								<ImageOverlay
-									handleShare={handleShare}
-									id={index}
-									src={`${process.env.NEXT_PUBLIC_IMGIX_URL}/${img.src}`}
-									handleDownload={handleDownload}
-								/>
+								<div className='absolute top-0 w-full h-full flex items-end'>
+									<div className='relative px-4 py-4 flex justify-end items-end w-full h-[20%] z-10 bg-[linear-gradient(0deg,rgba(0,0,0,0.8)10%,rgba(0,0,0,0))] opacity-0 group-hover:opacity-100 transition ease-in-out duration-150'>
+										<OptionIcons
+											handleModalOpen={handleModalOpen}
+											img={img}
+										/>
+									</div>
+								</div>
 							</motion.div>
 						</Link>
 					</li>

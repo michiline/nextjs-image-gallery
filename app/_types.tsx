@@ -36,16 +36,21 @@ export interface ImageDimensionsProps {
 	y: number
 }
 
-export interface JustifiedGridProps {
+export interface GridGalleryProps {
 	gallery: GalleryProps
 	activeCategory: CategoryProps
 	galleryRef: LegacyRef<HTMLUListElement>
-	handleShare: (params: {
-		e: React.MouseEvent<SVGSVGElement, MouseEvent>
-		id: number
-	}) => void
-	handleDownload: (params: {
-		e: React.MouseEvent<SVGSVGElement, MouseEvent>
-		src: string
-	}) => void
+	handleModalOpen: (params: ModalProps) => void
+}
+
+export interface FullscreenImageProps {
+	category: CategoryProps
+	handleModalOpen: (params: ModalProps) => void
+}
+
+export type ModalState = 'share' | 'download'
+
+export interface ModalProps {
+	type: ModalState
+	data: string
 }
