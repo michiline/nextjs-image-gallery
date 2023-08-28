@@ -9,6 +9,8 @@ const ModalContent = ({
 	modalType: ModalType | null
 	data: string | null
 }) => {
+	const pathname = usePathname()
+	const searchParams = useSearchParams()
 	if (modalType === 'download' && data) {
 		return (
 			<div className='max-w-[450px] w-full p-4 m-2 bg-white'>
@@ -38,8 +40,6 @@ const ModalContent = ({
 			</div>
 		)
 	}
-	const pathname = usePathname()
-	const searchParams = useSearchParams()
 	if (modalType === 'share' && data) {
 		const query = createQuery({
 			searchParams,
