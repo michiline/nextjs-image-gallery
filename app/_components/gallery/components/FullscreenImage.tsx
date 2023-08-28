@@ -175,7 +175,7 @@ const FullscreenImage = ({
 							className='p-2 opacity-60 peer-hover/left:opacity-100 hover:opacity-100 absolute left-2 top-1/2 cursor-pointer'
 							onClick={handleSlideBackward}
 						/>
-						<div className='w-full flex fixed top-0 items-center justify-between h-16 z-30 px-4'>
+						<div className='w-full flex fixed top-0 items-center justify-between h-16 z-30 px-2 md:px-4'>
 							<button
 								className='group text-white'
 								onClick={() => {
