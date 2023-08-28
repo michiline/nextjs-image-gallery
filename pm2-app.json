@@ -1,0 +1,9 @@
+{
+	"apps": [
+		{
+			"name": "le",
+			"script": "yarn",
+			"args": "run start"
+		}
+	]
+}
