@@ -15,6 +15,4 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Or visit demo:
-
-[http://gallery.mivandic.com/](gallery.mivandic.com)
+Or visit online demo: [gallery.mivandic.com](http://gallery.mivandic.com)
