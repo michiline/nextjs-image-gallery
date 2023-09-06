@@ -6,8 +6,16 @@ import { FullscreenProvider } from '@/_contexts/FullscreenContext'
 const nunito = Nunito({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+	metadataBase: new URL('https://gallery.mivandic.com'),
 	title: 'NextJS Image Gallery',
-	description: 'NextJS justified grid & fullscreen image gallery',
+	description: `NextJS justified grid and fullscreen gallery.`,
+	openGraph: {
+		type: 'website',
+		siteName: 'NextJS Image Gallery',
+		description: `NextJS justified grid and fullscreen gallery.`,
+		title: 'NextJS Image Gallery',
+		url: `https://gallery.mivandic.com`,
+	},
 }
 
 export default function RootLayout({

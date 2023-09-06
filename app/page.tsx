@@ -1,22 +1,5 @@
 import Link from 'next/link'
 
-import type { Metadata } from 'next'
-
-export async function generateMetadata(): Promise<Metadata> {
-	return {
-		metadataBase: new URL('https://gallery.mivandic.com'),
-		title: 'NextJS Image Gallery',
-		description: `NextJS justified grid and fullscreen gallery.`,
-		openGraph: {
-			type: 'website',
-			siteName: 'NextJS Image Gallery',
-			description: `NextJS justified grid and fullscreen gallery.`,
-			title: 'NextJS Image Gallery',
-			url: `https://gallery.mivandic.com`,
-		},
-	}
-}
-
 export default function Home() {
 	return (
 		<div className='flex flex-col w-full px-6 py-6'>
